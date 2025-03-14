@@ -1,0 +1,6 @@
+{
+    "todos": [
+      { "id": 1, "title": "첫 번째 할 일", "completed": false },
+      { "id": 2, "title": "두 번째 할 일", "completed": true }
+    ]
+  }
