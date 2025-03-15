@@ -20,8 +20,8 @@ const TodoInput: React.FC<TodoInputProps> = ({ value, onChange, onSubmit }) => {
         value={value}
         onChange={onChange}
         onKeyDown={handleKeyDown}
-        placeholder="할 일을 입력하세요..."
-        className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="할 일을 입력하세요"
+        className="flex-1 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <button
         onClick={onSubmit}
