@@ -13,8 +13,8 @@ interface TodoItemProps {
 
 const TodoItem: React.FC<TodoItemProps> = ({todo, editId, onToggle, onDelete, onEditToggle, onEdit}) => {
   return (
-    <div className="flex justify-between items-center p-4 border bg-white shadow-md rounded-lg hover:bg-gray-50 w-full gap-2">
-        <input type="checkbox" checked={todo.completed}
+    <div className="flex justify-between items-center bg-gray-100 shadow-lg shadow-gray-300 rounded-lg p-4 hover:bg-gray-50 w-full gap-2">
+        <input type="checkbox" checked={todo.completed} className='cursor-pointer'
         onChange={() => onToggle(todo.id, todo.completed)} />
         {
             editId === todo.id ? 
@@ -24,13 +24,13 @@ const TodoItem: React.FC<TodoItemProps> = ({todo, editId, onToggle, onDelete, on
         }
         <button 
           onClick={() => onEditToggle(todo.id)}
-          className="text-red-500 hover:text-red-700"
+          className="text-red-500 hover:text-red-700 cursor-pointer"
         >
           수정
         </button>
         <button
           onClick={() => onDelete(todo.id)}
-          className="text-red-500 hover:text-red-700"
+          className="text-red-500 hover:text-red-700 cursor-pointer"
         >
           삭제
         </button>

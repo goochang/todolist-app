@@ -13,12 +13,15 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({todos, editId, onToggle, onDelete, onEditToggle, onEdit}) => {
   return (
-    <div className="space-y-4 w-full">
+      todos.length ? 
+      <div className="space-y-4 w-full">
         {todos && todos.map(todo => (
             <TodoItem key={todo.id} todo={todo} editId={editId}
             onToggle={onToggle} onDelete={onDelete} onEditToggle={onEditToggle} onEdit={onEdit} />
         ))}
     </div>
+    :
+    <div className="space-y-4 w-full text-center text-gray-500">할 일이 없습니다.</div>
   )
 }
 

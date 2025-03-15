@@ -20,9 +20,16 @@ export default function Home() {
       queryKey: ["todos"],
       queryFn: fetchTodos,
     });
-
     const [inputValue, setInputValue] = useState("");
     const [editId, setEditId] = useState(0);
+    const [filter, setFilter] = useState<"all" | "completed" | "incomplete">("all");
+
+    const filteredTodos = todos?.filter(todo => {
+      if (filter === "completed") return todo.completed;
+      if (filter === "incomplete") return !todo.completed;
+      return true; // "all"일 경우 전체 반환
+    });
+
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(e.target.value);
@@ -115,8 +122,19 @@ export default function Home() {
 
     return (
       // <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="flex flex-col items-center justify-center max-w-4xl min-h-screen w-full mx-auto p-4">
+      <div className="flex flex-col max-w-4xl w-full mx-auto p-4 my-16">
         <h1 className="text-2xl font-semibold text-center mb-6">할 일 목록</h1>
+        <div className="flex gap-2 my-4">
+          <button onClick={() => setFilter("all")} className={`px-4 py-2 rounded cursor-pointer ${filter === "all" ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
+            전체
+          </button>
+          <button onClick={() => setFilter("completed")} className={`px-4 py-2 rounded cursor-pointer ${filter === "completed" ? "bg-green-500 text-white" : "bg-gray-200"}`}>
+            완료
+          </button>
+          <button onClick={() => setFilter("incomplete")} className={`px-4 py-2 rounded cursor-pointer ${filter === "incomplete" ? "bg-red-500 text-white" : "bg-gray-200"}`}>
+            미완료
+          </button>
+        </div>
         <div className="mb-6 w-full">
           <TodoInput 
             value={inputValue} 
@@ -125,7 +143,7 @@ export default function Home() {
           />
         </div>
         <div className="w-full">
-            <TodoList todos={todos || []} editId={editId} 
+            <TodoList todos={filteredTodos || []} editId={editId} 
             onToggle={handleToogleTodo} onDelete={handleDeleteTodo} onEditToggle={handleEditToggle} onEdit={handleEdit} />
         </div>
       </div>
