@@ -15,11 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// export const metadata: Metadata = {
-//   title: "My Todo App",
-//   description: "A simple and clean Todo List app",
-// };
-
 const queryClient = new QueryClient(); // react-query 클라이언트 설정
 
 export default function RootLayout({
