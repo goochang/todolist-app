@@ -30,11 +30,12 @@ export default function Home() {
       return true; // "all"일 경우 전체 반환
     });
 
-
+    // 입력값
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(e.target.value);
     };
     
+    // 할일 추가
     const addTodoMutation = useMutation({
       mutationFn: async (newTodo: { id: string, title: string; completed: boolean }) => {
         const response = await fetch("http://localhost:3000/todos", {
@@ -49,6 +50,8 @@ export default function Home() {
         queryClient.invalidateQueries({ queryKey: ["todos"] });
       },
     });
+
+    // 완료 상태 변경
     const toggleMutation = useMutation({
       mutationFn: async (todo: { id: number; completed: boolean }) => {
         const response = await fetch(`http://localhost:3000/todos/${todo.id}`, {
@@ -63,6 +66,8 @@ export default function Home() {
         queryClient.invalidateQueries({ queryKey: ["todos"] });
       },
     });
+
+    // 할일 삭제
     const deleteMutation = useMutation({
       mutationFn: async (id: number) => {
         const response = await fetch(`http://localhost:3000/todos/${id}`, {
@@ -75,6 +80,8 @@ export default function Home() {
         queryClient.invalidateQueries({ queryKey: ["todos"] });
       },
     });
+
+    // 할일 변경
     const editTodoMutation = useMutation({
       mutationFn: async (todo: { id: number; title: string }) => {
         const response = await fetch(`http://localhost:3000/todos/${todo.id}`, {
@@ -89,7 +96,8 @@ export default function Home() {
         queryClient.invalidateQueries({ queryKey: ["todos"] });
       },
     });
-    // 입력값 추가
+    
+    // 할일 추가 할당
     const handleAddTodo = () => {
       if (inputValue.trim() === "") return;
       const newId = todos?.length ? (Math.max(...todos.map((todo) => Number(todo.id))) + 1).toString() : "1";
@@ -97,17 +105,22 @@ export default function Home() {
       setInputValue(""); // 입력창 초기화
     };
 
+    // 완료 상태 변경 할당
     const handleToogleTodo = (id: number, completed: boolean) => {
       toggleMutation.mutate({id, completed});
     };
 
+    // 할일 삭제 할당
     const handleDeleteTodo = (id: number) => {
       deleteMutation.mutate(id);
     };
 
+    // 수정 토글
     const handleEditToggle = (id: number) => {
       setEditId(id);
     };
+    
+    // 할일 변경 할당 
     const handleEdit = (id: number, title:string) => {
       editTodoMutation.mutate({id, title});
     };
@@ -121,7 +134,6 @@ export default function Home() {
     }
 
     return (
-      // <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="flex flex-col max-w-4xl w-full mx-auto p-4 my-16">
         <h1 className="text-2xl font-semibold text-center mb-6">할 일 목록</h1>
         <div className="flex gap-2 my-4">
