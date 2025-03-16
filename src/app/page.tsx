@@ -125,12 +125,22 @@ export default function Home() {
       editTodoMutation.mutate({id, title});
     };
 
-    if(isLoading){
-      return <div>Loading...</div>
+    if (isLoading) {
+      return (
+        <div className="flex flex-col max-w-4xl w-full mx-auto p-4 my-16 justify-center items-center h-full">
+          <div className="loader">
+            <h1>Loading...</h1>
+          </div>
+        </div>
+      );
     }
-
+    
     if (error instanceof Error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <div className="flex flex-col max-w-4xl w-full mx-auto p-4 my-16 justify-center items-center h-full">
+          <p>Error: {error.message}</p>
+        </div>
+      );
     }
 
     return (
