@@ -15,7 +15,7 @@
 
 ## 실행 방법
 
-1. **서버 실행** (가상 API 서버 실행)
+1. **서버 실행**  
    ```bash
    npm run server
    npm run dev
